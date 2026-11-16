@@ -25,15 +25,15 @@ export function Reveal({ children, delay = 0, y = 24, className }: { children: R
 }
 
 export function Overline({ children }: { children: ReactNode }) {
-  return <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-red-600">{children}</div>;
+  return <div className="font-mono text-xs uppercase tracking-[0.22em] text-red-600 md:text-sm">{children}</div>;
 }
 
 export function SectionHead({ title, sub }: { title: string; sub?: string }) {
   return (
     <Reveal>
       <div className="text-center">
-        <h2 className="font-display text-2xl font-bold uppercase leading-tight text-white md:text-4xl">{title}</h2>
-        {sub && <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-neutral-400">{sub}</p>}
+        <h2 className="font-display text-3xl font-bold uppercase leading-tight text-white md:text-5xl">{title}</h2>
+        {sub && <p className="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-neutral-400 md:text-lg">{sub}</p>}
       </div>
     </Reveal>
   );
@@ -41,7 +41,7 @@ export function SectionHead({ title, sub }: { title: string; sub?: string }) {
 
 export function ArrowIcon({ className = "" }: { className?: string }) {
   return (
-    <svg className={className} width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+    <svg className={className} width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
       <path d="M3 10h13M11 4.5 16.5 10 11 15.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
@@ -49,7 +49,7 @@ export function ArrowIcon({ className = "" }: { className?: string }) {
 
 export function CheckIcon({ className = "" }: { className?: string }) {
   return (
-    <svg className={className} width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+    <svg className={className} width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
       <path d="m4 10.5 4 4 8-9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
@@ -57,7 +57,7 @@ export function CheckIcon({ className = "" }: { className?: string }) {
 
 export function DocIcon({ className = "" }: { className?: string }) {
   return (
-    <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <svg className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M7 3h7l4 4v14H7V3Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
       <path d="M14 3v4h4M9.5 12h5M9.5 15.5h5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
