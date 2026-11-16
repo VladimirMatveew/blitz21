@@ -10,37 +10,37 @@ export default function Footer() {
   if (pathname === "/") return null;
 
   return (
-    <footer className="border-t border-neutral-800 bg-neutral-950">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 text-center md:grid-cols-2 lg:grid-cols-4">
+    <footer className="border-t border-[#1c242e] bg-[#0e1116]">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 text-center md:grid-cols-2 md:px-6 lg:grid-cols-4">
         <div>
-          <div className="flex justify-center"><Logo className="h-16 w-auto" /></div>
-          <p className="mt-4 text-sm leading-relaxed text-neutral-400">Инженерные системы пожарной и охранной безопасности. Проектирование, монтаж, ПНР, обслуживание.</p>
+          <div className="flex justify-center"><Logo className="logo-foot" /></div>
+          <p className="t-body mt-3 text-[#94a3b1]">Инженерные системы пожарной и охранной безопасности. Проектирование, монтаж, ПНР, обслуживание.</p>
         </div>
         <div>
-          <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-red-600">Услуги</div>
-          <ul className="mt-4 grid gap-2.5 text-sm">
-            {services.map((s) => (<li key={s.slug}><Link href={`/services/${s.slug}`} className="text-neutral-400 hover:text-white">{s.title}</Link></li>))}
+          <div className="t-label text-[#ff6a5f]">Услуги</div>
+          <ul className="mt-3 grid gap-1.5">
+            {services.map((s) => (<li key={s.slug}><Link href={`/services/${s.slug}`} className="t-body rounded-lg px-2 py-1 text-[#94a3b1] transition hover:bg-[#141a21] hover:text-white">{s.title}</Link></li>))}
           </ul>
         </div>
         <div>
-          <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-red-600">Компания</div>
-          <ul className="mt-4 grid gap-2.5 text-sm">
-            {nav.map((l) => (<li key={l.href}><Link href={l.href} className="text-neutral-400 hover:text-white">{l.label}</Link></li>))}
+          <div className="t-label text-[#ff6a5f]">Компания</div>
+          <ul className="mt-3 grid gap-1.5">
+            {nav.map((l) => (<li key={l.href}><Link href={l.href} className="t-body rounded-lg px-2 py-1 text-[#94a3b1] transition hover:bg-[#141a21] hover:text-white">{l.label}</Link></li>))}
           </ul>
         </div>
         <div>
-          <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-red-600">Контакты</div>
-          <ul className="mt-4 grid gap-2.5 text-sm text-neutral-400">
-            <li><a href={`mailto:${company.email}`} className="text-white hover:text-red-500">{company.email}</a></li>
-            <li>{company.phone}</li>
-            <li>{company.address}</li>
+          <div className="t-label text-[#ff6a5f]">Контакты</div>
+          <ul className="mt-3 grid gap-1.5 text-[#94a3b1]">
+            <li><a href={`mailto:${company.email}`} className="t-body break-all text-white transition hover:text-[#ff6a5f]">{company.email}</a></li>
+            <li className="t-body">{company.phone}</li>
+            <li className="t-label text-[#5f6d7b]">{company.address}</li>
           </ul>
         </div>
       </div>
-      <div className="border-t border-neutral-800">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-5 text-xs text-neutral-500 md:flex-row">
-          <span>© {new Date().getFullYear()} {company.legal}. Все права защищены.</span>
-          <span>Информация на сайте не является публичной офертой.</span>
+      <div className="border-t border-[#1c242e]">
+        <div className="t-label mx-auto flex max-w-7xl flex-col items-center justify-between gap-1.5 px-4 py-4 text-[#5f6d7b] md:flex-row md:px-6">
+          <span>© {new Date().getFullYear()} {company.legal}</span>
+          <span>Информация на сайте не является публичной офертой</span>
         </div>
       </div>
     </footer>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { company, objectScales } from "@/lib/site";
-import { ArrowIcon, CheckIcon, Overline, Reveal, SectionHead } from "@/components/ui";
+import { ArrowIcon, CheckIcon, Chip, Overline, Reveal, SectionHead } from "@/components/ui";
 
 const principles = [
   "Проектные решения по действующим нормам",
@@ -13,56 +13,54 @@ const principles = [
 
 export default function AboutPage() {
   return (
-    <main className="bg-neutral-950 text-neutral-100">
-      <section className="relative overflow-hidden border-b border-neutral-800">
-        <div className="relative mx-auto max-w-4xl px-6 py-24 text-center md:py-32">
+    <main className="bg-[#08090b]">
+      <section className="relative overflow-hidden border-b border-[#1c242e]">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgb(255_68_56/0.13),transparent_62%)]" />
+        <div className="hero-inner relative mx-auto max-w-3xl text-center">
           <Reveal><Overline>О компании</Overline></Reveal>
-          <Reveal delay={0.08}>
-            <h1 className="mt-6 font-display text-3xl font-bold uppercase leading-tight md:text-5xl">Инженерная компания полного цикла</h1>
-            <p className="mx-auto mt-6 max-w-2xl leading-relaxed text-neutral-400">
-              {company.legal} проектирует, монтирует и обслуживает системы пожарной и охранной безопасности. Работаем с объектами любого масштаба — от небольших помещений до предприятий и социальных учреждений.
+          <Reveal delay={0.06}>
+            <h1 className="t-h1 mt-2 text-white">Инженерная компания полного цикла</h1>
+            <p className="t-body mx-auto mt-2 max-w-2xl text-[#94a3b1]">
+              {company.legal} проектирует, монтирует и обслуживает системы пожарной и охранной безопасности — от небольших помещений до предприятий и социальных учреждений.
             </p>
           </Reveal>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-20">
-        <SectionHead title="Для кого работаем" />
-        <div className="mt-12 grid gap-4 md:grid-cols-3">
+      <section className="mx-auto max-w-6xl px-4 py-6 md:px-6">
+        <div className="grid gap-3 md:grid-cols-3">
           {objectScales.map((o, i) => (
             <Reveal key={o.title} delay={i * 0.06}>
-              <div className="h-full border border-neutral-800 bg-neutral-900/40 p-8 text-center">
-                <h3 className="font-display text-base font-bold uppercase">{o.title}</h3>
-                <p className="mt-4 text-sm leading-relaxed text-neutral-400">{o.text}</p>
+              <div className="h-full rounded-3xl border border-[#26303c] bg-[#0e1116] p-5 text-center">
+                <h3 className="t-lead text-white">{o.title}</h3>
+                <div className="mt-3 flex flex-wrap justify-center gap-1.5">{o.examples.map((e) => <Chip key={e} tone="soft">{e}</Chip>)}</div>
+                <p className="t-body mt-3 text-[#94a3b1]">{o.text}</p>
               </div>
             </Reveal>
           ))}
         </div>
+        <Reveal delay={0.2}>
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-3 rounded-3xl border border-[#26303c] bg-[#0e1116] p-5 text-center">
+            <span className="t-lead text-white">Нужен подрядчик для объекта?</span>
+            <Link href="/contacts" className="t-chip flex items-center gap-2 rounded-2xl bg-[#ff4438] px-6 py-3 font-semibold text-white shadow-lg shadow-red-900/40 transition hover:bg-[#e13227]">Связаться <ArrowIcon /></Link>
+          </div>
+        </Reveal>
       </section>
 
-      <section className="border-y border-neutral-800 bg-neutral-900/40">
-        <div className="mx-auto max-w-5xl px-6 py-20">
+      <section className="border-t border-[#1c242e] bg-[#0e1116]/60">
+        <div className="mx-auto max-w-4xl px-4 py-10 md:px-6">
           <SectionHead title="Принципы работы" />
-          <div className="mt-12 grid gap-3 md:grid-cols-2">
+          <div className="mt-6 grid gap-2.5 md:grid-cols-2">
             {principles.map((p, i) => (
               <Reveal key={p} delay={i * 0.04}>
-                <div className="flex items-start gap-4 border border-neutral-800 bg-neutral-950 p-5">
-                  <span className="mt-0.5 text-red-600"><CheckIcon /></span>
-                  <span className="text-sm leading-relaxed">{p}</span>
+                <div className="flex h-full items-start gap-3 rounded-2xl border border-[#26303c] bg-[#08090b] p-4">
+                  <span className="mt-0.5 shrink-0 text-[#35d07f]"><CheckIcon /></span>
+                  <span className="t-body text-[#dbe4ec]">{p}</span>
                 </div>
               </Reveal>
             ))}
           </div>
         </div>
-      </section>
-
-      <section className="mx-auto max-w-5xl px-6 py-20">
-        <Reveal>
-          <div className="flex flex-col items-center gap-6 border border-neutral-800 bg-neutral-900/40 p-8 text-center">
-            <h2 className="font-display text-xl font-bold uppercase md:text-2xl">Нужен подрядчик для объекта?</h2>
-            <Link href="/contacts" className="flex items-center gap-2 bg-red-600 px-6 py-3.5 text-sm font-semibold text-white hover:bg-red-700">Связаться <ArrowIcon /></Link>
-          </div>
-        </Reveal>
       </section>
     </main>
   );

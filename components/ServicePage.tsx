@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { processSteps, services, type ServiceSlug } from "@/lib/site";
-import { ArrowIcon, CheckIcon, Reveal, SectionHead, ServiceIcon } from "@/components/ui";
+import { ArrowIcon, CheckIcon, Chip, Reveal, SectionHead, ServiceIcon } from "@/components/ui";
 import ServiceVisual from "@/components/ServiceVisual";
 
 export default function ServicePage({ slug }: { slug: ServiceSlug }) {
@@ -10,54 +10,52 @@ export default function ServicePage({ slug }: { slug: ServiceSlug }) {
   const others = services.filter((s) => s.slug !== slug);
 
   return (
-    <main className="bg-neutral-950 text-neutral-100">
-      <section className="relative overflow-hidden border-b border-neutral-800">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgb(220_38_38/0.10),transparent_60%)]" />
+    <main className="bg-[#08090b]">
+      <section className="relative overflow-hidden border-b border-[#1c242e]">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgb(255_68_56/0.12),transparent_62%)]" />
         <div className="grain pointer-events-none absolute inset-0" />
-        <div className="relative mx-auto max-w-5xl px-6 py-20 text-center md:py-28">
-          <Reveal><ServiceVisual slug={service.slug} className="mx-auto h-[200px] w-[200px] md:h-[280px] md:w-[280px]" /></Reveal>
-          <Reveal delay={0.08}>
-            <h1 className="mt-8 font-display text-4xl font-bold uppercase leading-tight md:text-6xl">{service.title}</h1>
-            <p className="mt-4 font-mono text-base uppercase tracking-wider text-neutral-400 md:text-lg">{service.tagline}</p>
-            <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-neutral-400 md:text-xl">{service.description}</p>
+        <div className="hero-inner relative mx-auto max-w-4xl text-center">
+          <Reveal><ServiceVisual slug={service.slug} className="emblem-sm mx-auto" /></Reveal>
+          <Reveal delay={0.06}>
+            <h1 className="t-h1 mt-3 text-white">{service.title}</h1>
+            <p className="t-lead mx-auto mt-2 max-w-2xl text-[#ff6a5f]">{service.lead}</p>
+            <p className="t-body mx-auto mt-2 max-w-2xl text-[#94a3b1]">{service.description}</p>
           </Reveal>
-          <Reveal delay={0.16}>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link href="/contacts" className="flex items-center gap-2 bg-red-600 px-8 py-4 text-base font-semibold text-white hover:bg-red-700">Обсудить проект <ArrowIcon /></Link>
-              <Link href="/documents" className="border border-neutral-700 px-8 py-4 text-base font-semibold hover:border-neutral-500">Документы</Link>
+          <Reveal delay={0.12}>
+            <div className="mt-4 flex flex-wrap justify-center gap-2.5">
+              <Link href="/contacts" className="t-chip flex items-center gap-2 rounded-2xl bg-[#ff4438] px-6 py-3 font-semibold text-white shadow-lg shadow-red-900/40 transition hover:bg-[#e13227]">Обсудить проект <ArrowIcon /></Link>
+              <Link href="/documents" className="t-chip rounded-2xl border border-[#26303c] px-6 py-3 font-semibold text-[#dbe4ec] transition hover:border-[#4a5866] hover:bg-[#141a21]">Документы</Link>
             </div>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <div className="mt-8 flex flex-wrap justify-center gap-2">
-              {service.objects.map((o) => (<span key={o} className="rounded-full border border-neutral-800 px-4 py-1.5 text-sm text-neutral-400 md:text-base">{o}</span>))}
+            <div className="mt-3 flex flex-wrap justify-center gap-1.5">
+              {service.objects.map((o) => <Chip key={o} tone="soft">{o}</Chip>)}
             </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-20">
+      <section className="mx-auto max-w-6xl px-4 py-8 md:px-6">
         <SectionHead title="Состав работ" />
-        <div className="mt-12 grid gap-3 md:grid-cols-2">
+        <div className="mt-6 grid gap-2.5 md:grid-cols-2">
           {service.scope.map((item, i) => (
             <Reveal key={item} delay={i * 0.04}>
-              <div className="flex h-full items-start gap-4 border border-neutral-800 bg-neutral-900/40 p-6">
-                <span className="mt-0.5 text-red-600"><CheckIcon /></span>
-                <span className="text-base leading-relaxed text-neutral-200">{item}</span>
+              <div className="flex h-full items-start gap-3 rounded-2xl border border-[#26303c] bg-[#0e1116] p-4">
+                <span className="mt-0.5 shrink-0 text-[#ff6a5f]"><CheckIcon /></span>
+                <span className="t-body text-[#dbe4ec]">{item}</span>
               </div>
             </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="border-y border-neutral-800 bg-neutral-900/40">
-        <div className="mx-auto max-w-4xl px-6 py-20 text-center">
+      <section className="border-y border-[#1c242e] bg-[#0e1116]/60">
+        <div className="mx-auto max-w-3xl px-4 py-8 text-center md:px-6">
           <SectionHead title="Результат для заказчика" />
-          <div className="mt-10 grid gap-4">
+          <div className="mt-6 grid gap-2.5">
             {service.result.map((r) => (
               <Reveal key={r}>
-                <div className="flex items-center justify-center gap-3 border border-neutral-800 bg-neutral-950 p-6">
-                  <span className="text-red-600"><CheckIcon /></span>
-                  <span className="text-base text-neutral-300">{r}</span>
+                <div className="flex items-center justify-center gap-3 rounded-2xl border border-[#26303c] bg-[#08090b] p-4">
+                  <span className="shrink-0 text-[#35d07f]"><CheckIcon /></span>
+                  <span className="t-body text-[#dbe4ec]">{r}</span>
                 </div>
               </Reveal>
             ))}
@@ -65,32 +63,32 @@ export default function ServicePage({ slug }: { slug: ServiceSlug }) {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-20">
+      <section className="mx-auto max-w-6xl px-4 py-8 md:px-6">
         <SectionHead title="Этапы" />
-        <div className="mt-12 grid gap-4 md:grid-cols-4">
+        <div className="mt-6 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
           {processSteps.map((p, i) => (
             <Reveal key={p.title} delay={i * 0.05}>
-              <div className="h-full border border-neutral-800 bg-neutral-900/40 p-6 text-center">
-                <div className="mx-auto h-2 w-2 rounded-full bg-red-600" />
-                <h3 className="mt-4 font-display text-base font-bold uppercase">{p.title}</h3>
-                <p className="mt-3 text-base leading-relaxed text-neutral-400">{p.text}</p>
+              <div className="h-full rounded-2xl border border-[#26303c] bg-[#0e1116] p-4 text-center">
+                <div className="mx-auto h-2 w-2 rounded-full bg-[#ff4438]" />
+                <h3 className="t-lead mt-2.5 text-white">{p.title}</h3>
+                <p className="t-body mt-1.5 text-[#94a3b1]">{p.text}</p>
               </div>
             </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 pb-20">
+      <section className="mx-auto max-w-6xl px-4 pb-10 md:px-6">
         <SectionHead title="Другие направления" />
-        <div className="mt-12 grid gap-3 md:grid-cols-2">
+        <div className="mt-6 grid gap-2.5 md:grid-cols-2">
           {others.map((s) => (
             <Reveal key={s.slug}>
-              <Link href={`/services/${s.slug}`} className="group flex items-center justify-between border border-neutral-800 bg-neutral-900/40 p-6 hover:border-red-600/50">
-                <div className="flex items-center gap-4">
-                  <span className="text-red-600"><ServiceIcon slug={s.slug} /></span>
-                  <span className="text-base font-semibold">{s.title}</span>
-                </div>
-                <ArrowIcon className="text-neutral-500 group-hover:text-red-500" />
+              <Link href={`/services/${s.slug}`} className="group flex items-center justify-between gap-3 rounded-2xl border border-[#26303c] bg-[#0e1116] p-4 transition hover:border-[#ff4438]/50 hover:bg-[#141a21]">
+                <span className="flex items-center gap-3">
+                  <span className="shrink-0 text-[#ff6a5f]"><ServiceIcon slug={s.slug} /></span>
+                  <span className="t-body font-semibold text-white">{s.title}</span>
+                </span>
+                <ArrowIcon className="shrink-0 text-[#5f6d7b] transition group-hover:translate-x-1 group-hover:text-[#ff6a5f]" />
               </Link>
             </Reveal>
           ))}
