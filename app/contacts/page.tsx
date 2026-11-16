@@ -1,105 +1,54 @@
-"use client";
+import type { Metadata } from "next";
+import LeadForm from "@/components/LeadForm";
+import { company } from "@/lib/site";
+import { Overline, Reveal } from "@/components/ui";
 
-import { motion } from "framer-motion";
+export const metadata: Metadata = {
+  title: "Контакты",
+  description: "Связаться с ООО «БЛИЦ»: заявки на проектирование, монтаж и обслуживание инженерных систем безопасности.",
+};
 
 export default function ContactsPage() {
   return (
-    <main>
-      <section className="max-w-7xl mx-auto px-6">
-        <div className="min-h-[calc(100vh-80px)] pt-6 pb-8 flex flex-col">
-          
-          {/* TITLE */}
-          <div className="mt-10">
-            <motion.h1
-              initial={{ opacity: 0, x: -22, filter: "blur(2px)" }}
-              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
-              className="text-3xl md:text-5xl font-semibold leading-tight"
-            >
-              Контакты
-            </motion.h1>
+    <main className="bg-neutral-950 text-neutral-100">
+      <section className="relative overflow-hidden border-b border-neutral-800">
+        <div className="relative mx-auto max-w-4xl px-6 py-24 text-center md:py-32">
+          <Reveal><Overline>Контакты</Overline></Reveal>
+          <Reveal delay={0.08}>
+            <h1 className="mt-6 font-display text-3xl font-bold uppercase leading-tight md:text-5xl">Обсудим объект</h1>
+            <p className="mx-auto mt-6 max-w-2xl leading-relaxed text-neutral-400">Опишите задачу — подготовим техническое решение, состав работ и порядок сдачи.</p>
+          </Reveal>
+        </div>
+      </section>
 
-            <motion.p
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.12 }}
-              className="mt-4 text-sm md:text-base text-gray-400 max-w-3xl leading-relaxed"
-            >
-              Оставьте заявку — подготовим решение, расчёт и сроки. Телефон и регион
-              добавим позже (пока заглушки).
-            </motion.p>
-          </div>
-
-          {/* BLOCKS — ПОДНЯТЫ ВЫШЕ */}
-          <div className="mt-10 grid lg:grid-cols-2 gap-4">
-            {/* LEFT */}
-            <div className="border border-neutral-800 p-5 bg-neutral-950">
-              <div className="text-white font-semibold">Связь</div>
-
-              <div className="mt-4 grid gap-4 text-sm">
-                <Field label="Телефон" value="+7 (___) ___-__-__" />
-                <Field label="Email" value="info@domain.ru" />
-                <Field label="Регион" value="(укажем позже)" />
-              </div>
-
-              <div className="mt-6 text-xs text-gray-500 leading-relaxed">
-                На следующем этапе подключим отправку заявок в Telegram / почту и фиксацию в CRM.
-              </div>
-            </div>
-
-            {/* RIGHT */}
-            <div className="border border-neutral-800 p-5 bg-neutral-950">
-              <div className="text-white font-semibold">Заявка</div>
-
-              <form className="mt-4 grid gap-3">
-                <Input label="Имя" placeholder="Иван" />
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <Input label="Телефон" placeholder="+7 ___ ___-__-__" />
-                  <Input label="Email" placeholder="mail@domain.ru" />
-                </div>
-
+      <section className="mx-auto max-w-5xl px-6 py-16">
+        <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+          <Reveal>
+            <div className="h-full border border-neutral-800 bg-neutral-900/40 p-8 text-center">
+              <div className="grid gap-6">
                 <div>
-                  <div className="text-xs text-gray-500 mb-2">Описание задачи</div>
-                  <textarea
-                    className="w-full bg-neutral-950 border border-neutral-800 px-4 py-3 text-sm outline-none focus:border-neutral-600 transition resize-none"
-                    placeholder="Объект, площадь, сроки, что нужно сделать..."
-                    rows={3}
-                  />
+                  <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500">Почта</div>
+                  <a href={`mailto:${company.email}`} className="mt-2 block text-lg font-semibold text-white hover:text-red-500">{company.email}</a>
                 </div>
-
-                <button
-                  type="button"
-                  className="mt-1 bg-red-600 hover:bg-red-700 transition px-6 py-3 text-sm font-medium"
-                >
-                  Отправить
-                </button>
-              </form>
+                <div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500">Телефон</div>
+                  <div className="mt-2 text-lg font-semibold text-neutral-400">{company.phone}</div>
+                </div>
+                <div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500">Адрес</div>
+                  <div className="mt-2 text-sm text-neutral-300">{company.address}</div>
+                </div>
+              </div>
             </div>
-          </div>
-
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="border border-neutral-800 bg-neutral-900/40 p-6 md:p-8">
+              <div className="mb-6 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-red-600">Заявка</div>
+              <LeadForm />
+            </div>
+          </Reveal>
         </div>
       </section>
     </main>
-  );
-}
-
-function Field({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <div className="text-xs text-gray-500 mb-1">{label}</div>
-      <div className="text-sm text-gray-200">{value}</div>
-    </div>
-  );
-}
-
-function Input({ label, placeholder }: { label: string; placeholder: string }) {
-  return (
-    <div>
-      <div className="text-xs text-gray-500 mb-2">{label}</div>
-      <input
-        className="w-full bg-neutral-950 border border-neutral-800 px-4 py-3 text-sm outline-none focus:border-neutral-600 transition"
-        placeholder={placeholder}
-      />
-    </div>
   );
 }

@@ -1,52 +1,46 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { company, nav, services } from "@/lib/site";
+import { Logo } from "@/components/ui";
+
 export default function Footer() {
+  const pathname = usePathname();
+  if (pathname === "/") return null;
+
   return (
-    <footer className="bg-neutral-950 border-t border-neutral-800 text-gray-400 text-sm mt-16">
-      <div className="max-w-7xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-8">
+    <footer className="border-t border-neutral-800 bg-neutral-950">
+      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 text-center md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <div className="text-white font-semibold tracking-wider uppercase">
-            «БЛИЦ»
-          </div>
-          <div className="mt-3 text-xs leading-relaxed">
-            Инженерные системы пожарной и охранной безопасности.
-            <br />
-            Монтаж, пуско-наладочные работы, обслуживание.
-          </div>
+          <div className="flex justify-center"><Logo className="h-16 w-auto" /></div>
+          <p className="mt-4 text-sm leading-relaxed text-neutral-400">Инженерные системы пожарной и охранной безопасности. Проектирование, монтаж, ПНР, обслуживание.</p>
         </div>
-
         <div>
-          <div className="text-white font-medium">Навигация</div>
-          <div className="mt-3 grid gap-2 text-xs">
-            <a className="hover:text-white transition" href="/services/fire">
-              Пожарная сигнализация
-            </a>
-            <a className="hover:text-white transition" href="/services/video">
-              Видеонаблюдение
-            </a>
-            <a className="hover:text-white transition" href="/services/scs">
-              СКС
-            </a>
-            <a className="hover:text-white transition" href="/services/skud">
-              СКУД
-            </a>
-            <a className="hover:text-white transition" href="/documents">
-              Документы
-            </a>
-          </div>
+          <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-red-600">Услуги</div>
+          <ul className="mt-4 grid gap-2.5 text-sm">
+            {services.map((s) => (<li key={s.slug}><Link href={`/services/${s.slug}`} className="text-neutral-400 hover:text-white">{s.title}</Link></li>))}
+          </ul>
         </div>
-
         <div>
-          <div className="text-white font-medium">Контакты</div>
-          <div className="mt-3 grid gap-2 text-xs">
-            <div>Телефон: +7 (___) ___-__-__</div>
-            <div>Email: info@domain.ru</div>
-            <div>Регион: (укажем позже)</div>
-          </div>
-
-          <div className="mt-5 text-[11px] text-gray-500 leading-relaxed">
-            © ООО «БЛИЦ». Все права защищены.
-            <br />
-            Информация на сайте не является публичной офертой.
-          </div>
+          <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-red-600">Компания</div>
+          <ul className="mt-4 grid gap-2.5 text-sm">
+            {nav.map((l) => (<li key={l.href}><Link href={l.href} className="text-neutral-400 hover:text-white">{l.label}</Link></li>))}
+          </ul>
+        </div>
+        <div>
+          <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-red-600">Контакты</div>
+          <ul className="mt-4 grid gap-2.5 text-sm text-neutral-400">
+            <li><a href={`mailto:${company.email}`} className="text-white hover:text-red-500">{company.email}</a></li>
+            <li>{company.phone}</li>
+            <li>{company.address}</li>
+          </ul>
+        </div>
+      </div>
+      <div className="border-t border-neutral-800">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-5 text-xs text-neutral-500 md:flex-row">
+          <span>© {new Date().getFullYear()} {company.legal}. Все права защищены.</span>
+          <span>Информация на сайте не является публичной офертой.</span>
         </div>
       </div>
     </footer>
