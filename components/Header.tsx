@@ -5,7 +5,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { company, nav, services, type ServiceSlug } from "@/lib/site";
-import { ArrowIcon, Logo, ServiceIcon } from "@/components/ui";
+import { ArrowIcon, ServiceIcon } from "@/components/ui";
+import BrandPulse from "@/components/BrandPulse";
 
 const tone: Record<ServiceSlug, string> = {
   fire: "text-[#ff6a5f]",
@@ -55,8 +56,9 @@ export default function Header() {
     <>
       <header className="fixed inset-x-0 top-0 z-50 border-b border-[#1c242e] bg-[#08090b]/92 backdrop-blur-md">
         <div className="mx-auto flex h-[var(--hdr)] max-w-7xl items-center justify-between gap-4 px-4 md:px-6">
-          <Link href="/" className="shrink-0" aria-label="ООО «БЛИЦ» — на главную">
-            <Logo className="logo-mark" />
+          <Link href="/" className="group flex shrink-0 items-center gap-2.5" aria-label="ООО «БЛИЦ» — на главную">
+            <BrandPulse className="h-10 w-10 transition-transform duration-300 group-hover:scale-110 md:h-11 md:w-11" />
+            <span className="t-lead hidden tracking-[0.24em] text-white sm:block">БЛИЦ</span>
           </Link>
 
           <nav className="hidden items-center gap-0.5 lg:flex">

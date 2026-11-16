@@ -37,6 +37,23 @@ body {
 .logo-mark { height: calc(var(--hdr) - 1rem); width: auto; }
 .logo-foot { height: 4.5rem; width: auto; }
 
+/* Живой знак в шапке: световое волокно + перелив спектра */
+@keyframes bp-hue {
+  from { filter: drop-shadow(0 0 9px rgb(255 68 56 / 0.5)) hue-rotate(0deg); }
+  to { filter: drop-shadow(0 0 9px rgb(255 68 56 / 0.5)) hue-rotate(360deg); }
+}
+.brand-pulse { animation: bp-hue 16s linear infinite; }
+.bp-spin, .bp-ping, .bp-ping2, .bp-core { transform-box: view-box; transform-origin: 24px 24px; }
+.bp-spin { animation: spin-slow 18s linear infinite; }
+@keyframes bp-dash { to { stroke-dashoffset: -68; } }
+.bp-flow { stroke-dasharray: 5 13; animation: bp-dash 2.2s linear infinite; }
+.bp-flow2 { stroke-dasharray: 4 14; animation: bp-dash 2.9s linear infinite reverse; }
+@keyframes bp-ping { 0% { transform: scale(0.55); opacity: 0.85; } 70% { opacity: 0; } 100% { transform: scale(2); opacity: 0; } }
+.bp-ping { animation: bp-ping 2.6s cubic-bezier(0, 0, 0.2, 1) infinite; }
+.bp-ping2 { animation: bp-ping 2.6s cubic-bezier(0, 0, 0.2, 1) infinite; animation-delay: 1.3s; }
+@keyframes bp-breathe { 0%, 100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.14); opacity: 1; } }
+.bp-core { animation: bp-breathe 2.2s ease-in-out infinite; }
+
 .t-hero, .t-h1, .t-title, .t-lead, .t-body, .t-label { hyphens: none; -webkit-hyphens: none; word-break: normal; overflow-wrap: normal; }
 .t-hero { font-family: var(--font-display); font-weight: 800; line-height: 1.16; letter-spacing: -0.015em; font-size: clamp(1.05rem, calc(1.5vmin + 0.7rem), 2rem); text-wrap: balance; }
 .t-h1 { font-family: var(--font-display); font-weight: 800; line-height: 1.12; letter-spacing: -0.02em; font-size: clamp(1.3rem, calc(2.2vmin + 0.7rem), 2.5rem); text-wrap: balance; }
@@ -47,7 +64,6 @@ body {
 .t-label { font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; font-size: clamp(0.6875rem, calc(0.3vmin + 0.6rem), 0.8125rem); line-height: 1.4; }
 .t-chip { font-size: clamp(0.75rem, calc(0.4vmin + 0.65rem), 0.9375rem); }
 
-/* Поэкранная привязка: жёсткая на всех устройствах */
 .snap-root {
   position: relative;
   height: calc(100vh - var(--hdr));
@@ -142,6 +158,8 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   html, .snap-root { scroll-behavior: auto; }
+  .brand-pulse { animation: none; filter: drop-shadow(0 0 9px rgb(255 68 56 / 0.5)); }
+  .bp-spin, .bp-flow, .bp-flow2, .bp-ping, .bp-ping2, .bp-core,
   .aurora, .hemi-dome, .hemi-edge, .tick-ring, .tick-ring-rev, .gear-spin,
   .cable-flow, .ring-ping, .strobe, .led-blink, .cone-sweep, .scan-px,
   .rfid, .shackle, .granted, .wrench-swing, .ecg { animation: none; }

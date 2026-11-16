@@ -13,6 +13,7 @@ const sections = [
   { id: "checks", label: "Проверки" },
   { id: "standards", label: "Нормативы" },
   { id: "faq", label: "Вопросы" },
+  { id: "others", label: "Другие направления" },
 ];
 
 export default function ServicePage({ slug }: { slug: ServiceSlug }) {
@@ -60,7 +61,10 @@ export default function ServicePage({ slug }: { slug: ServiceSlug }) {
       )}
 
       <section id="stages" className="anchor mx-auto max-w-6xl px-4 py-10 md:px-6">
-        <Reveal><h2 className="t-h2 text-center text-white">Этапы работ</h2></Reveal>
+        <Reveal>
+          <h2 className="t-h2 text-center text-white">Этапы работ</h2>
+          <p className="t-body mx-auto mt-2 max-w-2xl text-center text-[#94a3b1]">Полный состав работ по&nbsp;направлению — от&nbsp;первого выезда до&nbsp;передачи документации.</p>
+        </Reveal>
         <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {service.stages.map((st, i) => (
             <Reveal key={st.title} delay={i * 0.05}>
@@ -149,7 +153,7 @@ export default function ServicePage({ slug }: { slug: ServiceSlug }) {
         <div className="mt-6"><Accordion items={service.faq} /></div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 pb-12 md:px-6">
+      <section className="mx-auto max-w-6xl px-4 pb-10 md:px-6">
         <Reveal>
           <div className="rounded-3xl border border-[#ff4438]/35 bg-gradient-to-br from-[#ff4438]/12 via-[#0e1116] to-[#0e1116] p-6 text-center md:p-8">
             <h2 className="t-h2 text-white">Нужен расчёт по&nbsp;вашему объекту?</h2>
@@ -160,17 +164,30 @@ export default function ServicePage({ slug }: { slug: ServiceSlug }) {
             </div>
           </div>
         </Reveal>
-        <div className="mt-8">
-          <Reveal><h2 className="t-h2 text-center text-white">Другие направления</h2></Reveal>
-          <div className="mt-5 grid gap-2.5 md:grid-cols-2">
-            {others.map((s) => (
-              <Reveal key={s.slug}>
-                <Link href={`/services/${s.slug}`} className="group flex items-center justify-between gap-3 rounded-2xl border border-[#26303c] bg-[#0e1116] p-4 transition hover:border-[#ff4438]/50 hover:bg-[#141a21]">
-                  <span className="flex items-center gap-3">
-                    <span className="shrink-0 text-[#ff6a5f]"><ServiceIcon slug={s.slug} /></span>
-                    <span className="t-body font-semibold text-white">{s.title}</span>
-                  </span>
-                  <ArrowIcon className="shrink-0 text-[#5f6d7b] transition group-hover:translate-x-1 group-hover:text-[#ff6a5f]" />
+      </section>
+
+      <section id="others" className="anchor border-t border-[#1c242e] bg-[#0e1116]/60">
+        <div className="mx-auto max-w-6xl px-4 py-10 md:px-6">
+          <Reveal>
+            <h2 className="t-h2 text-center text-white">Другие направления</h2>
+            <p className="t-body mx-auto mt-2 max-w-2xl text-center text-[#94a3b1]">Слаботочные системы работают вместе — вот что ещё мы&nbsp;делаем на&nbsp;объекте.</p>
+          </Reveal>
+          <div className="mt-6 grid gap-3 md:grid-cols-2">
+            {others.map((s, i) => (
+              <Reveal key={s.slug} delay={i * 0.05}>
+                <Link href={`/services/${s.slug}`} className="group block h-full rounded-3xl border border-[#26303c] bg-[#08090b] p-5 transition hover:border-[#ff4438]/50 hover:bg-[#0e1116]">
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#26303c] text-[#ff6a5f]"><ServiceIcon slug={s.slug} /></span>
+                    <span className="min-w-0 flex-1">
+                      <span className="t-lead block text-white">{s.title}</span>
+                      <span className="t-label block text-[#5f6d7b]">{s.short}</span>
+                    </span>
+                    <ArrowIcon className="shrink-0 text-[#5f6d7b] transition group-hover:translate-x-1 group-hover:text-[#ff6a5f]" />
+                  </div>
+                  <p className="t-body mt-3 text-[#94a3b1]">{s.lead}</p>
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {s.includes.map((x) => <Chip key={x} tone="soft">{x}</Chip>)}
+                  </div>
                 </Link>
               </Reveal>
             ))}

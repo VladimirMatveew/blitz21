@@ -1,10 +1,11 @@
-export default function MaintenancePage() {
-  return (
-    <main className="bg-neutral-950 text-white min-h-[calc(100vh-80px)] px-6 max-w-7xl mx-auto pt-28">
-      <h1 className="text-3xl md:text-5xl font-semibold">Техническое обслуживание</h1>
-      <p className="mt-6 text-gray-400 max-w-3xl">
-        Страница услуги в разработке: регламенты, периодичность, состав обслуживания.
-      </p>
-    </main>
-  );
+import type { Metadata } from "next";
+import ServicePage from "@/components/ServicePage";
+
+export const metadata: Metadata = {
+  title: "Обслуживание",
+  description: "Регламентное обслуживание слаботочных систем: приёмка и аудит, плановые работы, оперативные выезды, журналы и отчётность для надзорных органов.",
+};
+
+export default function Page() {
+  return <ServicePage slug="maintenance" />;
 }
