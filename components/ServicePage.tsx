@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { processSteps, services, type ServiceSlug } from "@/lib/site";
 import { ArrowIcon, CheckIcon, Chip, Reveal, SectionHead, ServiceIcon } from "@/components/ui";
 import ServiceVisual from "@/components/ServiceVisual";
+import SignalChain from "@/components/SignalChain";
 
 export default function ServicePage({ slug }: { slug: ServiceSlug }) {
   const service = services.find((s) => s.slug === slug);
@@ -29,9 +30,27 @@ export default function ServicePage({ slug }: { slug: ServiceSlug }) {
             <div className="mt-3 flex flex-wrap justify-center gap-1.5">
               {service.objects.map((o) => <Chip key={o} tone="soft">{o}</Chip>)}
             </div>
+            <div className="mt-2 flex flex-wrap justify-center gap-1.5">
+              {service.standards.map((x) => (
+                <span key={x} className="t-label rounded-full border border-[#1c242e] bg-[#08090b] px-3 py-1 text-[#7d8b99]">{x}</span>
+              ))}
+            </div>
           </Reveal>
         </div>
       </section>
+
+      {service.slug === "fire" && (
+        <section className="border-b border-[#1c242e] bg-[#0e1116]/60">
+          <div className="mx-auto max-w-4xl px-4 py-6 md:px-6">
+            <Reveal>
+              <div className="rounded-3xl border border-[#26303c] bg-[#08090b] px-4 py-4">
+                <div className="t-label mb-3 text-center text-[#ff6a5f]">Тракт системы</div>
+                <SignalChain />
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       <section className="mx-auto max-w-6xl px-4 py-8 md:px-6">
         <SectionHead title="Состав работ" />

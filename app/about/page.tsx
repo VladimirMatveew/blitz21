@@ -4,7 +4,7 @@ import { ArrowIcon, CheckIcon, Chip, Overline, Reveal, SectionHead } from "@/com
 
 const principles = [
   "Проектные решения по действующим нормам",
-  "Фиксация договорённостей в договоре и смете",
+  "Договорённости зафиксированы в договоре и смете",
   "Исполнительная документация и акты сдачи",
   "Фотофиксация этапов и прозрачность работ",
   "Гарантия на оборудование и работы",
@@ -15,13 +15,13 @@ export default function AboutPage() {
   return (
     <main className="bg-[#08090b]">
       <section className="relative overflow-hidden border-b border-[#1c242e]">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgb(255_68_56/0.13),transparent_62%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgb(255_255_255/0.07),transparent_62%)]" />
         <div className="hero-inner relative mx-auto max-w-3xl text-center">
           <Reveal><Overline>О компании</Overline></Reveal>
           <Reveal delay={0.06}>
-            <h1 className="t-h1 mt-2 text-white">Инженерная компания полного цикла</h1>
-            <p className="t-body mx-auto mt-2 max-w-2xl text-[#94a3b1]">
-              {company.legal} проектирует, монтирует и обслуживает системы пожарной и охранной безопасности — от небольших помещений до предприятий и социальных учреждений.
+            <h1 className="t-h1 mt-2 text-white">Слаботочные системы полного цикла</h1>
+            <p className="t-body mx-auto mt-2 max-w-xl text-[#94a3b1]">
+              {company.legal}: проект, монтаж, пусконаладка и&nbsp;обслуживание — от&nbsp;небольших помещений до&nbsp;предприятий и&nbsp;социальных учреждений.
             </p>
           </Reveal>
         </div>
