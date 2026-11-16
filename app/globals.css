@@ -15,10 +15,10 @@
   --font-sans: var(--font-golos);
 }
 
-:root { color-scheme: dark; --hdr: 4.25rem; }
+:root { color-scheme: dark; --hdr: 4.25rem; --subnav: 3rem; }
 @media (max-height: 620px) { :root { --hdr: 3.25rem; } }
 
-html { scroll-behavior: smooth; scroll-padding-top: calc(var(--hdr) + 0.75rem); }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--hdr) + var(--subnav) + 0.5rem); }
 
 body {
   background: #08090b;
@@ -33,53 +33,55 @@ body {
 :focus-visible { outline: 2px solid #ff4438; outline-offset: 3px; }
 
 .blitz-logo { filter: url(#blitz-logo-alpha); user-select: none; -webkit-user-drag: none; }
-.logo-hero { width: clamp(280px, 84vmin, 820px); max-height: 48vh; object-fit: contain; }
+.logo-hero { width: clamp(260px, 80vmin, 780px); max-height: 44vh; object-fit: contain; }
 .logo-mark { height: calc(var(--hdr) - 1rem); width: auto; }
 .logo-foot { height: 4.5rem; width: auto; }
 
-/* Типографика: без переносов по слогам, строки балансируются */
-.t-hero, .t-h1, .t-title, .t-lead, .t-body, .t-label {
-  hyphens: none;
-  -webkit-hyphens: none;
-  word-break: normal;
-  overflow-wrap: normal;
-}
-.t-hero {
-  font-family: var(--font-display); font-weight: 800; line-height: 1.16; letter-spacing: -0.015em;
-  font-size: clamp(1.05rem, calc(1.5vmin + 0.7rem), 2rem); text-wrap: balance;
-}
-.t-h1 {
-  font-family: var(--font-display); font-weight: 800; line-height: 1.12; letter-spacing: -0.02em;
-  font-size: clamp(1.35rem, calc(2.2vmin + 0.7rem), 2.5rem); text-wrap: balance;
-}
-.t-title {
-  font-family: var(--font-display); font-weight: 800; line-height: 1.1; letter-spacing: -0.025em;
-  font-size: clamp(1.35rem, calc(2.8vmin + 0.6rem), 2.9rem); text-wrap: balance;
-}
-.t-lead {
-  font-family: var(--font-display); font-weight: 600; line-height: 1.35;
-  font-size: clamp(0.9rem, calc(0.9vmin + 0.7rem), 1.175rem); text-wrap: balance;
-}
+.t-hero, .t-h1, .t-title, .t-lead, .t-body, .t-label { hyphens: none; -webkit-hyphens: none; word-break: normal; overflow-wrap: normal; }
+.t-hero { font-family: var(--font-display); font-weight: 800; line-height: 1.16; letter-spacing: -0.015em; font-size: clamp(1.05rem, calc(1.5vmin + 0.7rem), 2rem); text-wrap: balance; }
+.t-h1 { font-family: var(--font-display); font-weight: 800; line-height: 1.12; letter-spacing: -0.02em; font-size: clamp(1.3rem, calc(2.2vmin + 0.7rem), 2.5rem); text-wrap: balance; }
+.t-title { font-family: var(--font-display); font-weight: 800; line-height: 1.1; letter-spacing: -0.025em; font-size: clamp(1.3rem, calc(2.6vmin + 0.6rem), 2.7rem); text-wrap: balance; }
+.t-h2 { font-family: var(--font-display); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; font-size: clamp(1.1rem, calc(1.5vmin + 0.65rem), 1.75rem); text-wrap: balance; }
+.t-lead { font-family: var(--font-display); font-weight: 600; line-height: 1.35; font-size: clamp(0.9rem, calc(0.9vmin + 0.7rem), 1.175rem); text-wrap: balance; }
 .t-body { font-size: clamp(0.875rem, calc(0.5vmin + 0.75rem), 1rem); line-height: 1.6; text-wrap: pretty; }
-.t-label {
-  font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em;
-  font-size: clamp(0.6875rem, calc(0.3vmin + 0.6rem), 0.8125rem); line-height: 1.4;
-}
+.t-label { font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; font-size: clamp(0.6875rem, calc(0.3vmin + 0.6rem), 0.8125rem); line-height: 1.4; }
 .t-chip { font-size: clamp(0.75rem, calc(0.4vmin + 0.65rem), 0.9375rem); }
 
-.screen {
-  min-height: 100%;
-  padding: clamp(0.5rem, 2vmin, 2rem) clamp(1rem, 4vw, 2rem) clamp(2.5rem, 5vmin, 3.5rem);
+/* Поэкранная привязка: жёсткая на всех устройствах */
+.snap-root {
+  position: relative;
+  height: calc(100vh - var(--hdr));
+  height: calc(100dvh - var(--hdr));
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
 }
+.screen {
+  position: relative;
+  min-height: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(0.5rem, 2vmin, 2rem) clamp(1rem, 4vw, 2rem) 5.5rem;
+}
+@media (min-width: 1024px) { .screen { padding-bottom: 3.5rem; } }
+
 .hero-inner { padding: clamp(1rem, 3vmin, 2.25rem) clamp(1rem, 4vw, 2rem) clamp(0.75rem, 2vmin, 1.5rem); }
-.emblem { width: clamp(104px, 23vmin, 290px); height: clamp(104px, 23vmin, 290px); }
-.emblem-sm { width: clamp(88px, 16vmin, 170px); height: clamp(88px, 16vmin, 170px); }
+.emblem { width: clamp(100px, 22vmin, 280px); height: clamp(100px, 22vmin, 280px); }
+.emblem-sm { width: clamp(84px, 15vmin, 160px); height: clamp(84px, 15vmin, 160px); }
+.anchor { scroll-margin-top: calc(var(--hdr) + var(--subnav) + 0.75rem); }
 
 @media (max-height: 620px) {
   .compact-hide { display: none !important; }
-  .emblem { width: clamp(72px, 17vmin, 128px); height: clamp(72px, 17vmin, 128px); }
-  .logo-hero { max-height: 34vh; width: clamp(200px, 56vmin, 460px); }
-  .screen { padding-top: 0.25rem; padding-bottom: 1.75rem; }
+  .emblem { width: clamp(68px, 16vmin, 120px); height: clamp(68px, 16vmin, 120px); }
+  .logo-hero { max-height: 30vh; width: clamp(190px, 52vmin, 420px); }
+  .screen { padding-top: 0.25rem; padding-bottom: 4.5rem; }
   .tight { margin-top: 0.4rem !important; }
 }
 
@@ -87,11 +89,10 @@ body {
 .snap-scroll::-webkit-scrollbar { width: 8px; height: 0; }
 .snap-scroll::-webkit-scrollbar-track { background: #08090b; }
 .snap-scroll::-webkit-scrollbar-thumb { background: linear-gradient(#ff4438, #7f1d1d); border-radius: 999px; }
-.snap-scroll::-webkit-scrollbar-thumb:hover { background: #ff6a5f; }
-@media (max-width: 1023px) {
-  .snap-scroll { scrollbar-width: none; }
-  .snap-scroll::-webkit-scrollbar { display: none; }
-}
+@media (max-width: 1023px) { .snap-scroll { scrollbar-width: none; } .snap-scroll::-webkit-scrollbar { display: none; } }
+
+.subnav-scroll { scrollbar-width: none; }
+.subnav-scroll::-webkit-scrollbar { display: none; }
 
 .grain {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='0.5'/></svg>");
@@ -103,18 +104,8 @@ body {
 
 @keyframes hemi-rotate { from { transform: rotate(-160deg); } to { transform: rotate(200deg); } }
 @keyframes hemi-fade { 0%,25% { opacity: 0; } 40%,60% { opacity: 1; } 75%,100% { opacity: 0; } }
-.hemi-dome {
-  position: absolute; left: 0; top: 0; width: 100%; height: 50%;
-  transform-origin: 50% 100%; border-radius: 999px 999px 0 0;
-  background: linear-gradient(to bottom, rgb(var(--vc) / 0.5), rgb(var(--vc) / 0.06) 70%, transparent);
-  animation: hemi-rotate 7s linear infinite, hemi-fade 7s linear infinite;
-}
-.hemi-edge {
-  position: absolute; left: 50%; top: 0; width: 2px; height: 50%;
-  transform-origin: 50% 100%;
-  background: linear-gradient(to top, rgb(var(--vc) / 0), rgb(var(--vc) / 0.9));
-  animation: hemi-rotate 7s linear infinite, hemi-fade 7s linear infinite;
-}
+.hemi-dome { position: absolute; left: 0; top: 0; width: 100%; height: 50%; transform-origin: 50% 100%; border-radius: 999px 999px 0 0; background: linear-gradient(to bottom, rgb(var(--vc) / 0.5), rgb(var(--vc) / 0.06) 70%, transparent); animation: hemi-rotate 7s linear infinite, hemi-fade 7s linear infinite; }
+.hemi-edge { position: absolute; left: 50%; top: 0; width: 2px; height: 50%; transform-origin: 50% 100%; background: linear-gradient(to top, rgb(var(--vc) / 0), rgb(var(--vc) / 0.9)); animation: hemi-rotate 7s linear infinite, hemi-fade 7s linear infinite; }
 
 @keyframes spin-slow { to { transform: rotate(360deg); } }
 .tick-ring { animation: spin-slow 40s linear infinite; }
@@ -150,7 +141,7 @@ body {
 .ecg { stroke-dasharray: 60 260; animation: dash-ecg 2.8s linear infinite; }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+  html, .snap-root { scroll-behavior: auto; }
   .aurora, .hemi-dome, .hemi-edge, .tick-ring, .tick-ring-rev, .gear-spin,
   .cable-flow, .ring-ping, .strobe, .led-blink, .cone-sweep, .scan-px,
   .rfid, .shackle, .granted, .wrench-swing, .ecg { animation: none; }

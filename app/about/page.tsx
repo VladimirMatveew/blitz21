@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { company, objectScales } from "@/lib/site";
-import { ArrowIcon, CheckIcon, Chip, Overline, Reveal, SectionHead } from "@/components/ui";
+import { company, objectScales, processSteps, stack } from "@/lib/site";
+import { ArrowIcon, CheckIcon, Chip, Overline, Reveal } from "@/components/ui";
 
 const principles = [
   "Проектные решения по действующим нормам",
@@ -27,7 +27,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-6 md:px-6">
+      <section className="mx-auto max-w-6xl px-4 py-8 md:px-6">
         <div className="grid gap-3 md:grid-cols-3">
           {objectScales.map((o, i) => (
             <Reveal key={o.title} delay={i * 0.06}>
@@ -39,28 +39,62 @@ export default function AboutPage() {
             </Reveal>
           ))}
         </div>
-        <Reveal delay={0.2}>
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-3 rounded-3xl border border-[#26303c] bg-[#0e1116] p-5 text-center">
-            <span className="t-lead text-white">Нужен подрядчик для объекта?</span>
-            <Link href="/contacts" className="t-chip flex items-center gap-2 rounded-2xl bg-[#ff4438] px-6 py-3 font-semibold text-white shadow-lg shadow-red-900/40 transition hover:bg-[#e13227]">Связаться <ArrowIcon /></Link>
-          </div>
-        </Reveal>
       </section>
 
-      <section className="border-t border-[#1c242e] bg-[#0e1116]/60">
-        <div className="mx-auto max-w-4xl px-4 py-10 md:px-6">
-          <SectionHead title="Принципы работы" />
-          <div className="mt-6 grid gap-2.5 md:grid-cols-2">
-            {principles.map((p, i) => (
-              <Reveal key={p} delay={i * 0.04}>
-                <div className="flex h-full items-start gap-3 rounded-2xl border border-[#26303c] bg-[#08090b] p-4">
-                  <span className="mt-0.5 shrink-0 text-[#35d07f]"><CheckIcon /></span>
-                  <span className="t-body text-[#dbe4ec]">{p}</span>
+      <section className="border-y border-[#1c242e] bg-[#0e1116]/60">
+        <div className="mx-auto max-w-6xl px-4 py-10 md:px-6">
+          <Reveal><h2 className="t-h2 text-center text-white">Как ведём объект</h2></Reveal>
+          <div className="mt-6 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
+            {processSteps.map((p, i) => (
+              <Reveal key={p.title} delay={i * 0.05}>
+                <div className="h-full rounded-2xl border border-[#26303c] bg-[#08090b] p-4 text-center">
+                  <div className="mx-auto h-2 w-2 rounded-full bg-[#ff4438]" />
+                  <h3 className="t-lead mt-2.5 text-white">{p.title}</h3>
+                  <p className="t-body mt-1.5 text-[#94a3b1]">{p.text}</p>
                 </div>
               </Reveal>
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-10 md:px-6">
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div>
+            <Reveal><h2 className="t-h2 text-white">Принципы работы</h2></Reveal>
+            <div className="mt-5 grid gap-2.5">
+              {principles.map((p, i) => (
+                <Reveal key={p} delay={i * 0.04}>
+                  <div className="flex items-start gap-3 rounded-2xl border border-[#26303c] bg-[#0e1116] p-4">
+                    <span className="mt-0.5 shrink-0 text-[#35d07f]"><CheckIcon /></span>
+                    <span className="t-body text-[#dbe4ec]">{p}</span>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+          <div>
+            <Reveal><h2 className="t-h2 text-white">Технологический стек</h2></Reveal>
+            <div className="mt-5 grid gap-2.5 sm:grid-cols-2">
+              {stack.map((g, i) => (
+                <Reveal key={g.title} delay={i * 0.05}>
+                  <div className="h-full rounded-2xl border border-[#26303c] bg-[#0e1116] p-4">
+                    <h3 className="t-label text-[#ff6a5f]">{g.title}</h3>
+                    <ul className="mt-2 grid gap-1">
+                      {g.items.map((x) => (<li key={x} className="t-body text-[#b8c4d0]">{x}</li>))}
+                    </ul>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+        <Reveal delay={0.2}>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 rounded-3xl border border-[#26303c] bg-[#0e1116] p-5 text-center">
+            <span className="t-lead text-white">Нужен подрядчик для объекта?</span>
+            <Link href="/contacts" className="t-chip flex items-center gap-2 rounded-2xl bg-[#ff4438] px-6 py-3 font-semibold text-white shadow-lg shadow-red-900/40 transition hover:bg-[#e13227]">Связаться <ArrowIcon /></Link>
+          </div>
+        </Reveal>
       </section>
     </main>
   );
